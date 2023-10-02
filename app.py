@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, render_template
 import openai
 import random
 import os
@@ -44,33 +44,29 @@ def generate_prompt(profile_name, profile):
     Her life goal is {profile['life_goal']}.
     """
 
-@app.route('/chat_with_date', methods=['POST'])
+@app.route('/chat_with_date', methods=['GET', 'POST'])
 def chat_with_date():
-    user_message = request.json.get('message')
-    current_date_name = random.choice(list(profiles.keys()))
-    current_date_profile = profiles[current_date_name]
-    current_prompt = generate_prompt(current_date_name, current_date_profile)
+    ai_response = None
+    date_name = None
     
-    messages = [{"role": "system", "content": current_prompt}]
-    
-    if user_message.lower() in ["next", "move on", "next date"]:
-        return jsonify({"message": "Moving on to the next date..."})
+    if request.method == 'POST':
+        user_message = request.form.get('message')
+        current_date_name = random.choice(list(profiles.keys()))
+        current_date_profile = profiles[current_date_name]
+        current_prompt = generate_prompt(current_date_name, current_date_profile)
         
-    messages.append({"role": "user", "content": user_message})
-    
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=messages
-    )
-    
-    ai_message = response.choices[0].message['content']
-    tokens_used = response['usage']['total_tokens']
-    
-    return jsonify({
-        "date_name": current_date_name,
-        "ai_message": ai_message,
-        "tokens_used": tokens_used
-    })
+        messages = [{"role": "system", "content": current_prompt}]
+        messages.append({"role": "user", "content": user_message})
+        
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages
+        )
+        
+        ai_response = response.choices[0].message['content']
+        date_name = current_date_name
+
+    return render_template('chat.html', ai_response=ai_response, date_name=date_name)
 
 if __name__ == "__main__":
     app.run(debug=True)
