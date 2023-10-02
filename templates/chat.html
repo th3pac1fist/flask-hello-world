@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <title>Chat with {{ profile_name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with Date</title>
 </head>
 <body>
-    <h1>Chat with Date</h1>
-    <form action="/chat_with_date" method="post">
-        <label for="message">Your Message:</label><br>
-        <textarea name="message" id="message" rows="4" cols="50"></textarea><br><br>
-        <input type="submit" value="Send">
+    <h1>Chat with {{ profile_name }}</h1>
+    <div class="chat-box">
+        {% for message in messages %}
+        <p class="{{ message['role'] }}"><strong>{{ message['role'].title() }}:</strong> {{ message['content'] }}</p>
+        {% endfor %}
+    </div>
+    <form action="{{ url_for('chat', profile_name=profile_name) }}" method="post" class="chat-form">
+        <textarea name="message" required></textarea>
+        <button type="submit">Send</button>
     </form>
-    {% if ai_response %}
-    <h2>Response:</h2>
-    <p><strong>{{ date_name }}:</strong> {{ ai_response }}</p>
-    {% endif %}
+    <a href="{{ url_for('reset_chat') }}" class="reset-button">End Chat & Browse Again</a>
 </body>
 </html>

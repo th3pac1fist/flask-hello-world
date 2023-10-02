@@ -1,85 +1,85 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #1a1a1a;
-    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #E91E63; /* Neon Pink */
+    text-align: center;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
 }
 
 h1 {
-    background-color: #1a1a1a;
-    color: #ff66d9; /* Neon Pink */
-    text-align: center;
-    padding: 20px 0;
-    border-bottom: 2px solid #ff66d9;
-}
-
-form {
-    max-width: 600px;
-    margin: 50px auto;
+    background-color: #1E1E1E;
     padding: 20px;
-    background-color: #2a2a2a;
-    border: 2px solid #ff66d9;
-    border-radius: 5px;
-    position: relative;
+    color: #E91E63; /* Neon Pink */
+    border-bottom: 3px solid #E91E63;
 }
 
-form::before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    bottom: -5px;
-    left: -5px;
-    z-index: -1;
-    background: linear-gradient(40deg, #ff66d9, transparent);
-    border: 1px solid #ff66d9;
-    border-radius: 5px;
+.profiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
 }
 
-label, textarea, input[type="submit"] {
-    display: block;
-    width: 100%;
-    margin-bottom: 20px;
+.profile {
+    border: 2px solid #E91E63;
+    padding: 10px;
+    width: 220px;
+    border-radius: 10px;
+}
+
+.chat-button, .reset-button {
+    display: inline-block;
+    background-color: #E91E63;
+    color: #121212;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.chat-box {
+    border: 2px solid #E91E63;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.chat-form {
+    max-width: 600px;
+    margin: 20px auto;
 }
 
 textarea {
+    width: 100%;
     padding: 10px;
-    resize: vertical;
-    height: 100px;
+    margin-bottom: 10px;
+    border: 2px solid #E91E63;
     border-radius: 5px;
-    border: 1px solid #ff66d9;
-    background-color: #1a1a1a;
-    color: #e0e0e0;
 }
 
-input[type="submit"] {
-    background-color: #ff66d9;
-    color: #1a1a1a;
-    padding: 10px 15px;
+button {
+    background-color: #E91E63;
+    color: #121212;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
 }
 
-input[type="submit"]:hover {
-    background-color: #ff33c7;
-    transform: translateY(-2px);
-}
-
-h2 {
-    text-align: center;
-    margin-top: 50px;
-    color: #ff66d9;
-}
-
-p {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #2a2a2a;
-    border-left: 5px solid #ff66d9;
+.user, .assistant {
+    border: 2px solid #E91E63;
+    padding: 10px;
+    margin: 10px 0;
     border-radius: 5px;
+}
+
+.user {
+    background-color: #1E1E1E;
+}
+
+.assistant {
+    background-color: #2E2E2E;
 }

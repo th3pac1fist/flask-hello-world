@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dating Profiles</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Browse Profiles</h1>
+    <div class="profiles">
+        {% for name, profile in profiles.items() %}
+        <div class="profile">
+            <img src="{{ url_for('static', filename='images/' + name + '.jpg') }}" alt="{{ name }}" width="200">
+            <h3>{{ name }}</h3>
+            <p>{{ profile['occupation'] }}, {{ profile['age'] }} years old</p>
+            <a href="{{ url_for('chat', profile_name=name) }}" class="chat-button">Chat Now</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
